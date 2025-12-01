@@ -3,13 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bubble Home</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- Top Bar (Black Strip) --- */
+        .top-bar {
+            background-color: black;
+            padding: 10px 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-link {
+            text-decoration: none;
+        }
+        
+        .brand-text {
+            color: #00ffff; /* Cyan color */
+            font-weight: 900;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            line-height: 1;
+            margin: 0;
+        }
+
+        /* --- Navigation Header (Logo + Pill + Buttons) --- */
+        .nav-header {
+            padding: 10px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Logo Placeholder */
+        .logo-placeholder {
+            width: 80px; 
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .logo-placeholder:hover {
+            transform: scale(1.05);
+        }
+        .logo-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Navigation Bar Container (The Pill) */
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap; 
+            background-color: rgba(255, 255, 255, 0.4); /* Glass effect similar to image */
+            padding: 8px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Search/Toggle Pill */
+        .search-pill {
+            background-color: #808080; /* Grey background */
+            border-radius: 30px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            width: 100px;
+            justify-content: space-between;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+
+        .toggle-switch {
+            width: 35px;
+            height: 18px;
+            background-color: #a9a9a9;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .toggle-knob {
+            width: 16px;
+            height: 16px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 1px;
+            left: 2px;
+        }
+
+        .search-icon {
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        /* Nav Links */
+        .nav-link-item {
+            color: black; /* Black text to match image */
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
+            white-space: nowrap; 
+            padding: 0 5px;
+        }
+
+        .nav-link-item:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        /* Auth Buttons */
+        .auth-btn-group {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-custom {
+            border-radius: 15px;
+            padding: 5px 20px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.1;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            min-width: 80px;
+            text-decoration: none;
+        }
+
+        .btn-signup {
+            background-color: #d3d3d3; /* Light grey */
+            color: black;
+        }
+
+        .btn-login {
+            background-color: #007bff; /* Blue */
+            color: white;
+        }
+
+        /* --- Featured Products Section --- */
+        .products-section {
+            padding: 40px;
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            text-decoration: underline;
+            margin-bottom: 30px;
+            color: black;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .products-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        /* Product Card Styling */
+        .product-card {
+            background-color: black;
+            border-radius: 40px;
+            padding: 25px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-image-container {
+            background-color: white;
+            border-radius: 30px;
+            width: 100%;
+            height: 220px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .product-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-title {
+            color: #00ffff; /* Cyan text */
+            font-size: 1.5rem;
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        /* --- Footer --- */
+        .footer-nav {
+            background-color: black;
+            padding: 15px 40px;
+            text-align: right;
+            margin-top: auto;
+        }
+
+        .footer-link {
+            color: #d500f9; /* Pink */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 992px) {
+            .nav-header {
+                justify-content: center;
+                gap: 20px;
+            }
+            .nav-container {
+                order: 3; /* Move pill below on tablet if needed, or keep centered */
+                width: 100%;
+                justify-content: center;
+            }
+            .auth-btn-group {
+                margin-left: auto; /* Push buttons to right or keep grouped */
+            }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <a href="home.html" class="brand-link">
+            <div class="brand-text">BUBBLE</div>
+        </a>
+    </div>
 
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        
+        <!-- Logo Area (Placeholder for your Image) -->
+        <a href="home.html" class="logo-placeholder">
+            <img src="https://placehold.co/100x100/png?text=B+Logo" alt="B Logo Placeholder">
+        </a>
 
+        <!-- Navigation Pill Container -->
+        <div class="nav-container">
+            <!-- Search/Toggle Pill -->
+            <div class="search-pill">
+                <div class="toggle-switch">
+                    <div class="toggle-knob"></div>
+                </div>
+                <div class="search-icon">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+            </div>
 
+            <!-- Links -->
+            <a href="products.html" class="nav-link-item">Products</a>
+            <a href="about.html" class="nav-link-item">About Us</a>
+            <a href="contact.html" class="nav-link-item">Contacts</a>
+        </div>
 
+        <!-- Auth Buttons -->
+        <div class="auth-btn-group">
+            <a href="signup.html" class="btn btn-custom btn-signup">
+                Sign<br>up
+            </a>
+            <a href="index.html" class="btn btn-custom btn-login">
+                Log<br>In
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <main class="products-section">
+        <h2 class="section-title">Featured Products</h2>
+
+        <div class="products-grid">
+            
+            <!-- Card 1 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Soap+Base" alt="Soap Base">
+                </div>
+                <div class="product-title">Soap Base</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Nimtree" alt="Nimtree Stalk">
+                </div>
+                <div class="product-title">Nimtree Stalk</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Sandal" alt="Sundal Essence">
+                </div>
+                <div class="product-title">Sundal Essence</div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Lavender" alt="Lavender Oil">
+                </div>
+                <div class="product-title">Lavender Oil</div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Aloe" alt="Aloe Vera">
+                </div>
+                <div class="product-title">Aloe Vera</div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Rose" alt="Rose Water">
+                </div>
+                <div class="product-title">Rose Water</div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Charcoal" alt="Charcoal">
+                </div>
+                <div class="product-title">Charcoal</div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://placehold.co/200x200/png?text=Shea" alt="Shea Butter">
+                </div>
+                <div class="product-title">Shea Butter</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-nav">
+        <a href="#" class="footer-link">Navigation</a>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
