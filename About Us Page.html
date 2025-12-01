@@ -3,9 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>About Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        .custom-header {
+            background: black;
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #0099ff;
+        }
+        .btn-simple {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .btn-signup { background: #e0e0e0; }
+        .btn-login { background: #007bff; color: white; }
+
+        /* Content */
+        .content-wrapper {
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+        .text-content {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .feature-img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .custom-footer {
+            background: black;
+            padding: 20px;
+            text-align: right;
+        }
+        .custom-footer a {
+            color: #d500f9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    
+
+    <header class="custom-header">
+        <h1>About Us</h1>
+        <div>
+            <button class="btn-simple btn-signup" onclick="simpleAlert('signup')">Sign Up</button>
+            <button class="btn-simple btn-login" onclick="simpleAlert('login')">Log In</button>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="text-content">
+            <p>
+                Our project began as a simple assignment in our ICT class. We were asked to make a basic website design in Figma, and that small task slowly grew into something much bigger.
+            </p>
+        </div>
+        <img src="ab1.png" alt="Students in computer lab" class="feature-img">
+
+        <div class="text-content">
+            <p>
+                With steady guidance, effort, and the blessing of Allah, we moved from a small class idea to selling customized soaps—different materials, scents, and designs—to both individuals and small businesses. Alhamdulillah.
+            </p>
+        </div>
+        <img src="ab2.png" alt="Handmade soaps" class="feature-img">
+    </main>
+
+    <footer class="custom-footer">
+        <a href="#">Navigation</a>
+    </footer>
+
+    <script>
+        function simpleAlert(type) {
+            console.log('Button clicked:', type);
+            if (type === 'signup') {
+                alert('Signup clicked');
+                window.open('https://example.com/signup', '_blank');
+            }
+            if (type === 'login') {
+                alert('Login clicked');
+                window.open('https://example.com/login', '_blank');
+            }
+        }
+        window.onbeforeunload = function () {
+        console.log('User is trying to leave the page');
+        return 'Are you sure you want to leave this page?';
+    };
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
