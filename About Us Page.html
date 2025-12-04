@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #fff;
+            background: #ffffff;
             margin: 0;
             padding: 0;
         }
 
         /* Header */
         .custom-header {
-            background: black;
+            background: #000;
             padding: 15px 20px;
-            color: white;
+            color: #fff;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 4px solid #0099ff;
         }
+
         .btn-simple {
             padding: 8px 16px;
             border: none;
             border-radius: 6px;
             font-weight: bold;
             margin-left: 10px;
+            cursor: pointer;
         }
         .btn-signup { background: #e0e0e0; }
-        .btn-login { background: #007bff; color: white; }
+        .btn-login { background: #007bff; color: #fff; }
 
         /* Content */
         .content-wrapper {
@@ -40,11 +41,13 @@
             margin: auto;
             padding: 40px 20px;
         }
+
         .text-content {
             font-size: 1.15rem;
             line-height: 1.5;
             margin-bottom: 20px;
         }
+
         .feature-img {
             width: 100%;
             border-radius: 4px;
@@ -54,7 +57,7 @@
 
         /* Footer */
         .custom-footer {
-            background: black;
+            background: #000;
             padding: 20px;
             text-align: right;
         }
@@ -65,6 +68,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header class="custom-header">
@@ -78,17 +82,17 @@
     <main class="content-wrapper">
         <div class="text-content">
             <p>
-                Our project began as a simple assignment in our ICT class. We were asked to make a basic website design in Figma, and that small task slowly grew into something much bigger.
+                What started as a simple ICT class assignment gradually evolved into something meaningful. We began by designing a basic layout in Figma, and over time, that small spark grew into a hands‑on project we proudly worked on.
             </p>
         </div>
-        <img src="ab1.png" alt="Students in computer lab" class="feature-img">
+        <img src="ab1.png" alt="Students in computer lab" class="feature-img" />
 
         <div class="text-content">
             <p>
-                With steady guidance, effort, and the blessing of Allah, we moved from a small class idea to selling customized soaps—different materials, scents, and designs—to both individuals and small businesses. Alhamdulillah.
+                With patience, guidance, and effort—and by the blessing of Allah—we expanded our small class idea into creating and selling customized soaps. Different materials, scents, and designs soon became part of our creative process.
             </p>
         </div>
-        <img src="ab2.png" alt="Handmade soaps" class="feature-img">
+        <img src="ab2.png" alt="Handmade soaps" class="feature-img" />
     </main>
 
     <footer class="custom-footer">
@@ -96,23 +100,24 @@
     </footer>
 
     <script>
+        console.log("Page Loaded: About Us");
+
         function simpleAlert(type) {
-            console.log('Button clicked:', type);
-            if (type === 'signup') {
-                alert('Signup clicked');
-                window.open('https://example.com/signup', '_blank');
+            console.log("Button clicked:", type);
+
+            if (type === "signup") {
+                alert("Signup button clicked. Thank you for exploring our project!");
             }
-            if (type === 'login') {
-                alert('Login clicked');
-                window.open('https://example.com/login', '_blank');
+            if (type === "login") {
+                alert("Login button clicked. Welcome back!");
             }
         }
-        window.onbeforeunload = function () {
-        console.log('User is trying to leave the page');
-        return 'Are you sure you want to leave this page?';
-    };
-</script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        window.onbeforeunload = function () {
+            console.log("User is attempting to exit the page.");
+            return "Are you sure you want to leave this page?";
+        };
+    </script>
+
 </body>
 </html>

@@ -1,400 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble Home</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bubble Home</title>
 
-        /* --- Top Bar (Black Strip) --- */
-        .top-bar {
-            background-color: black;
-            padding: 10px 40px;
-            display: flex;
-            align-items: center;
-        }
+<style>
+    /* --- Global Styles --- */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+    }
 
-        .brand-link {
-            text-decoration: none;
-        }
-        
-        .brand-text {
-            color: #00ffff; /* Cyan color */
-            font-weight: 900;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            line-height: 1;
-            margin: 0;
-        }
+    /* --- Top Black Bar --- */
+    .top-strip {
+        background: black;
+        padding: 12px 40px;
+        display: flex;
+        align-items: center;
+    }
 
-        /* --- Navigation Header (Logo + Pill + Buttons) --- */
-        .nav-header {
-            padding: 10px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+    .brand-title {
+        color: #00ffff;
+        font-size: 2.4rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin: 0;
+        text-decoration: none;
+    }
 
-        /* Logo Placeholder */
-        .logo-placeholder {
-            width: 80px; 
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-        .logo-placeholder:hover {
-            transform: scale(1.05);
-        }
-        .logo-placeholder img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
+    /* --- Navigation Header --- */
+    .header {
+        padding: 15px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 
-        /* Navigation Bar Container (The Pill) */
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap; 
-            background-color: rgba(255, 255, 255, 0.4); /* Glass effect similar to image */
-            padding: 8px 30px;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+    /* Logo Placeholder */
+    .logo-box {
+        width: 80px;
+        height: 80px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        transition: 0.2s;
+    }
 
-        /* Search/Toggle Pill */
-        .search-pill {
-            background-color: #808080; /* Grey background */
-            border-radius: 30px;
-            padding: 5px 10px;
-            display: flex;
-            align-items: center;
-            width: 100px;
-            justify-content: space-between;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
-            flex-shrink: 0;
-        }
+    .logo-box:hover {
+        transform: scale(1.06);
+    }
 
-        .toggle-switch {
-            width: 35px;
-            height: 18px;
-            background-color: #a9a9a9;
-            border-radius: 20px;
-            position: relative;
-        }
+    /* Navigation Pill Container */
+    .nav-pill {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 25px;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        flex-wrap: wrap;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    }
 
-        .toggle-knob {
-            width: 16px;
-            height: 16px;
-            background-color: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 1px;
-            left: 2px;
-        }
+    /* Search / Toggle Area */
+    .search-toggle {
+        background: #808080;
+        border-radius: 25px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
 
-        .search-icon {
-            width: 18px;
-            height: 18px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-        }
+    .toggle {
+        width: 35px;
+        height: 18px;
+        background: #a9a9a9;
+        border-radius: 20px;
+        position: relative;
+    }
 
-        /* Nav Links */
-        .nav-link-item {
-            color: black; /* Black text to match image */
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: color 0.2s;
-            white-space: nowrap; 
-            padding: 0 5px;
-        }
+    .toggle-ball {
+        width: 16px;
+        height: 16px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 1px;
+        left: 2px;
+    }
 
-        .nav-link-item:hover {
-            color: #333;
-            text-decoration: underline;
-        }
+    .search-bubble {
+        width: 18px;
+        height: 18px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+    }
 
-        /* Auth Buttons */
-        .auth-btn-group {
-            display: flex;
-            gap: 10px;
-            flex-shrink: 0;
-        }
+    /* Nav Links */
+    .nav-link {
+        color: black;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: 0.2s;
+    }
 
-        .btn-custom {
-            border-radius: 15px;
-            padding: 5px 20px;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.1;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 50px;
-            min-width: 80px;
-            text-decoration: none;
-        }
+    .nav-link:hover {
+        text-decoration: underline;
+    }
 
-        .btn-signup {
-            background-color: #d3d3d3; /* Light grey */
-            color: black;
-        }
+    /* Auth Buttons */
+    .auth-buttons {
+        display: flex;
+        gap: 8px;
+    }
 
-        .btn-login {
-            background-color: #007bff; /* Blue */
-            color: white;
-        }
+    .btn {
+        padding: 8px 20px;
+        font-weight: bold;
+        border-radius: 15px;
+        border: none;
+        cursor: pointer;
+        height: 50px;
+        min-width: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
 
-        /* --- Featured Products Section --- */
-        .products-section {
-            padding: 40px;
-            flex: 1;
-        }
+    .btn-signup {
+        background: #d3d3d3;
+        color: black;
+    }
 
-        .section-title {
-            font-size: 1.8rem;
-            text-decoration: underline;
-            margin-bottom: 30px;
-            color: black;
-            font-weight: 500;
-            display: inline-block;
-        }
+    .btn-login {
+        background: #007bff;
+        color: white;
+    }
 
-        .products-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
+    /* --- Product Section --- */
+    .product-section {
+        padding: 40px;
+        flex: 1;
+    }
 
-        /* Product Card Styling */
-        .product-card {
-            background-color: black;
-            border-radius: 40px;
-            padding: 25px;
-            width: 300px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .section-heading {
+        font-size: 1.8rem;
+        font-weight: 500;
+        text-decoration: underline;
+        color: black;
+        margin-bottom: 25px;
+    }
 
-        .product-image-container {
-            background-color: white;
-            border-radius: 30px;
-            width: 100%;
-            height: 220px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
 
-        .product-image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
+    .product-card {
+        background: black;
+        width: 300px;
+        padding: 25px;
+        border-radius: 40px;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
 
-        .product-title {
-            color: #00ffff; /* Cyan text */
-            font-size: 1.5rem;
-            margin-top: 10px;
-            font-weight: 400;
-        }
+    .product-img-box {
+        background: white;
+        border-radius: 30px;
+        width: 100%;
+        height: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 12px;
+        overflow: hidden;
+    }
 
-        /* --- Footer --- */
-        .footer-nav {
-            background-color: black;
-            padding: 15px 40px;
-            text-align: right;
-            margin-top: auto;
-        }
+    .product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-        .footer-link {
-            color: #d500f9; /* Pink */
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
+    .product-name {
+        color: #00ffff;
+        font-size: 1.4rem;
+        margin-top: 10px;
+    }
 
-        /* Responsive Fixes */
-        @media (max-width: 992px) {
-            .nav-header {
-                justify-content: center;
-                gap: 20px;
-            }
-            .nav-container {
-                order: 3; /* Move pill below on tablet if needed, or keep centered */
-                width: 100%;
-                justify-content: center;
-            }
-            .auth-btn-group {
-                margin-left: auto; /* Push buttons to right or keep grouped */
-            }
-        }
-    </style>
+    /* --- Footer --- */
+    .footer {
+        background: black;
+        padding: 15px 40px;
+        text-align: right;
+    }
+
+    .footer a {
+        color: #d500f9;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+</style>
 </head>
 <body>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <a href="home.html" class="brand-link">
-            <div class="brand-text">BUBBLE</div>
-        </a>
+<!-- Top Bar -->
+<div class="top-strip">
+    <a href="#" class="brand-title">BUBBLE</a>
+</div>
+
+<!-- Header -->
+<div class="header">
+
+    <!-- Logo -->
+    <div class="logo-box">B</div>
+
+    <!-- Navigation -->
+    <div class="nav-pill">
+
+        <div class="search-toggle">
+            <div class="toggle">
+                <div class="toggle-ball"></div>
+            </div>
+            <div class="search-bubble">🔍</div>
+        </div>
+
+        <a href="#" class="nav-link">Products</a>
+        <a href="#" class="nav-link">About Us</a>
+        <a href="#" class="nav-link">Contacts</a>
     </div>
 
-    <!-- Navigation Header -->
-    <div class="nav-header">
-        
-        <!-- Logo Area (Placeholder for your Image) -->
-        <a href="home.html" class="logo-placeholder">
-            <img src="https://placehold.co/100x100/png?text=B+Logo" alt="B Logo Placeholder">
-        </a>
-
-        <!-- Navigation Pill Container -->
-        <div class="nav-container">
-            <!-- Search/Toggle Pill -->
-            <div class="search-pill">
-                <div class="toggle-switch">
-                    <div class="toggle-knob"></div>
-                </div>
-                <div class="search-icon">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Links -->
-            <a href="products.html" class="nav-link-item">Products</a>
-            <a href="about.html" class="nav-link-item">About Us</a>
-            <a href="contact.html" class="nav-link-item">Contacts</a>
-        </div>
-
-        <!-- Auth Buttons -->
-        <div class="auth-btn-group">
-            <a href="signup.html" class="btn btn-custom btn-signup">
-                Sign<br>up
-            </a>
-            <a href="index.html" class="btn btn-custom btn-login">
-                Log<br>In
-            </a>
-        </div>
-
+    <!-- Auth Buttons -->
+    <div class="auth-buttons">
+        <button class="btn btn-signup">Sign<br>Up</button>
+        <button class="btn btn-login">Log<br>In</button>
     </div>
+</div>
 
-    <!-- Main Content -->
-    <main class="products-section">
-        <h2 class="section-title">Featured Products</h2>
 
-        <div class="products-grid">
-            
-            <!-- Card 1 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Soap+Base" alt="Soap Base">
-                </div>
-                <div class="product-title">Soap Base</div>
-            </div>
 
-            <!-- Card 2 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Nimtree" alt="Nimtree Stalk">
-                </div>
-                <div class="product-title">Nimtree Stalk</div>
-            </div>
+<!-- Product Section -->
+<div class="product-section">
+    <h2 class="section-heading">Featured Products</h2>
 
-            <!-- Card 3 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Sandal" alt="Sundal Essence">
-                </div>
-                <div class="product-title">Sundal Essence</div>
-            </div>
+    <div class="product-grid">
 
-            <!-- Card 4 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Lavender" alt="Lavender Oil">
-                </div>
-                <div class="product-title">Lavender Oil</div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Aloe" alt="Aloe Vera">
-                </div>
-                <div class="product-title">Aloe Vera</div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Rose" alt="Rose Water">
-                </div>
-                <div class="product-title">Rose Water</div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Charcoal" alt="Charcoal">
-                </div>
-                <div class="product-title">Charcoal</div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="product-card">
-                <div class="product-image-container">
-                    <img src="https://placehold.co/200x200/png?text=Shea" alt="Shea Butter">
-                </div>
-                <div class="product-title">Shea Butter</div>
-            </div>
-
+        <!-- Each image is now a simple colored block to avoid external URLs -->
+        <div class="product-card">
+            <div class="product-img-box"><div class="product-img" style="background:#eee;"></div></div>
+            <div class="product-name">Soap Base</div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer-nav">
-        <a href="#" class="footer-link">Navigation</a>
-    </footer>
+        <div class="product-card">
+            <div class="product-img-box"><div class="product-img" style="background:#dcdcdc;"></div></div>
+            <div class="product-name">Nimtree Stalk</div>
+        </div>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <div class="product-card">
+            <div class="product-img-box"
