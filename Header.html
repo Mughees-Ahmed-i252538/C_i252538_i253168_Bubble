@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navigation</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <style>
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            /* Full screen gradient background */
-            background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%); 
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -19,7 +16,7 @@
             flex-direction: column;
         }
 
-        /* --- Top Bar (Black Strip) --- */
+        /* --- Top Bar --- */
         .top-bar {
             background-color: black;
             padding: 10px 40px;
@@ -30,19 +27,18 @@
         .brand-link {
             text-decoration: none;
         }
-        
+
         .brand-text {
-            color: #00ffff; /* Cyan color */
+            color: #00ffff;
             font-weight: 900;
             font-size: 2.5rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             margin: 0;
         }
 
-        /* --- Navigation Header (Logo + Pill + Buttons) --- */
+        /* --- Navigation Header --- */
         .nav-header {
             padding: 10px 40px;
             display: flex;
@@ -52,13 +48,12 @@
             gap: 20px;
         }
 
-        /* Logo Placeholder */
         .logo-placeholder {
-            width: 80px; 
+            width: 80px;
             height: 80px;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             transition: transform 0.2s;
         }
         .logo-placeholder:hover {
@@ -70,30 +65,29 @@
             object-fit: contain;
         }
 
-        /* Navigation Bar Container (The Pill) */
+        /* Nav Pill */
         .nav-container {
             display: flex;
             align-items: center;
             gap: 20px;
-            flex-wrap: wrap; 
-            background-color: rgba(255, 255, 255, 0.4); /* Glass effect */
+            background-color: rgba(255, 255, 255, 0.4);
             padding: 8px 30px;
             border-radius: 50px;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
         }
 
-        /* Search/Toggle Pill */
+        /* Search / Toggle */
         .search-pill {
-            background-color: #808080; /* Grey background */
+            background-color: grey;
             border-radius: 30px;
             padding: 5px 10px;
             display: flex;
             align-items: center;
             width: 100px;
             justify-content: space-between;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
             flex-shrink: 0;
         }
 
@@ -113,6 +107,7 @@
             position: absolute;
             top: 1px;
             left: 2px;
+            transition: transform 0.2s;
         }
 
         .search-icon {
@@ -123,23 +118,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
         }
 
         /* Nav Links */
         .nav-link-item {
-            color: black;
             text-decoration: none;
-            font-weight: 500;
+            color: black;
             font-size: 1rem;
-            transition: color 0.2s;
-            white-space: nowrap; 
+            font-weight: 500;
             padding: 0 5px;
+            transition: 0.2s;
         }
 
         .nav-link-item:hover {
-            color: #333;
             text-decoration: underline;
+            color: #222;
         }
 
         /* Auth Buttons */
@@ -154,116 +147,116 @@
             padding: 5px 20px;
             font-weight: bold;
             text-align: center;
-            line-height: 1.1;
-            border: none;
+            height: 50px;
+            min-width: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50px;
-            min-width: 80px;
             text-decoration: none;
         }
 
         .btn-signup {
-            background-color: #d3d3d3; /* Light grey */
+            background-color: #d3d3d3;
             color: black;
         }
 
         .btn-login {
-            background-color: #007bff; /* Blue */
+            background-color: #007bff;
             color: white;
         }
 
-        /* Footer for the navigation page */
+        /* Footer */
         .nav-footer {
             margin-top: auto;
-            background-color: black;
             padding: 20px;
+            background: black;
             text-align: center;
             color: white;
         }
-        
+
         .footer-home-link {
             color: #d500f9;
-            font-weight: bold;
             text-decoration: none;
+            font-weight: bold;
         }
-        
+
         /* Responsive */
         @media (max-width: 992px) {
             .nav-header {
                 justify-content: center;
-                gap: 20px;
             }
             .nav-container {
                 width: 100%;
                 justify-content: center;
-                order: 3;
-            }
-            .auth-btn-group {
-                margin-left: auto;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- Top Bar -->
     <div class="top-bar">
-        <a href="home.html" class="brand-link">
+        <a class="brand-link" href="Homepage.html">
             <div class="brand-text">BUBBLE</div>
         </a>
     </div>
 
-    <!-- Navigation Header -->
     <div class="nav-header">
-        
-        <!-- Logo Area -->
-        <a href="home.html" class="logo-placeholder">
-            <img src="https://placehold.co/100x100/png?text=B+Logo" alt="B Logo Placeholder">
+        <a href="Homepage.html" class="logo-placeholder">
+            <img src="https://placehold.co/100x100/png?text=B+Logo" alt="Logo">
         </a>
 
-        <!-- Navigation Pill Container -->
         <div class="nav-container">
-            <!-- Search/Toggle Pill -->
             <div class="search-pill">
                 <div class="toggle-switch">
-                    <div class="toggle-knob"></div>
+                    <div class="toggle-knob" id="knob"></div>
                 </div>
                 <div class="search-icon">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="12" height="12" viewBox="0 0 24 24" stroke="black" stroke-width="3" fill="none">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                 </div>
             </div>
 
-            <!-- Links (Added Home and Your Cart) -->
-            <a href="home.html" class="nav-link-item">Home</a>
-            <a href="cart.html" class="nav-link-item">Your Cart</a>
-            <a href="products.html" class="nav-link-item">Products</a>
-            <a href="about.html" class="nav-link-item">About Us</a>
-            <a href="contact.html" class="nav-link-item">Contacts</a>
+            <a href="Homepage.html" class="nav-link-item">Home</a>
+            <a href="Shopping Cart Page.html" class="nav-link-item">Your Cart</a>
+            <a href="Service Listing Page.html" class="nav-link-item">Products</a>
+            <a href="About Us Page.html" class="nav-link-item">About Us</a>
+            <a href="Contact Us Page.html" class="nav-link-item">Contacts</a>
         </div>
 
-        <!-- Auth Buttons -->
         <div class="auth-btn-group">
-            <a href="signup.html" class="btn btn-custom btn-signup">
-                Sign<br>up
-            </a>
-            <a href="index.html" class="btn btn-custom btn-login">
-                Log<br>In
-            </a>
+            <a href="Sign-Up Page.html" class="btn-custom btn-signup">Sign<br />Up</a>
+            <a href="Homepage.html" class="btn-custom btn-login">Log<br />In</a>
         </div>
-
     </div>
 
-    <!-- Optional Footer to complete the page feel -->
     <footer class="nav-footer">
-        <a href="home.html" class="footer-home-link">Return to Home</a>
+        <a href="Homepage.html" class="footer-home-link">Return to Home</a>
     </footer>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+console.log("Navigation page loaded — Bootstrap-free version.");
+
+// Small interaction: toggle knob slide
+const knob = document.getElementById("knob");
+let toggled = false;
+
+knob.addEventListener("click", () => {
+    toggled = !toggled;
+    knob.style.transform = toggled ? "translateX(16px)" : "translateX(0)";
+});
+</script>
+<script>
+// Popup and console log on navigation
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('Navigation page loaded');
+  const links = document.querySelectorAll('a');
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      alert('Navigating to: ' + link.getAttribute('href'));
+    });
+  });
+});
+</script>
 </body>
 </html>

@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us - Bubble</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <style>
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: white;
+            font-family: Arial, sans-serif;
+            background: white;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- Top Info Header --- */
+        /* Top Info Header */
         .info-header {
-            background-color: #0d0d0d; /* Slightly lighter than pure black for contrast */
+            background: #0d0d0d;
             padding: 30px 20px;
             display: flex;
             justify-content: center;
@@ -27,11 +27,11 @@
         }
 
         .info-pill {
-            border: 3px solid #d500f9; /* Magenta/Pink border */
+            border: 3px solid #d500f9;
             border-radius: 50px;
             padding: 15px 40px;
             color: #d500f9;
-            background-color: black;
+            background: black;
             font-weight: bold;
             font-size: 1.2rem;
             min-width: 300px;
@@ -39,40 +39,49 @@
             box-shadow: 0 4px 10px rgba(213, 0, 249, 0.2);
         }
 
-        .info-pill span {
-            display: block;
-            color: #d500f9;
-        }
-        
         .info-value {
-            color: #ff69b4; /* Lighter pink for value */
+            color: #ff69b4;
         }
 
-        /* --- Main Content Grid --- */
+        /* Main Container */
         .main-container {
             flex: 1;
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
         }
 
-        /* Section Headers (Contact Us / Support Us) */
         .section-badge {
-            background-color: #9e9e9e; /* Grey background */
+            background: #9e9e9e;
             color: white;
             font-weight: 800;
             font-size: 1.5rem;
             padding: 10px 30px;
             border-radius: 30px;
-            display: inline-block;
+            text-align: center;
             margin-bottom: 25px;
             width: 100%;
-            text-align: center;
             max-width: 300px;
         }
 
-        /* Social Rows */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .col {
+            padding: 10px;
+        }
+        .col-5 { width: 100%; }
+        .col-1 { display: none; }
+        .col-6 { width: 100%; }
+
+        @media (min-width: 992px) {
+            .col-5 { width: 41%; }
+            .col-1 { width: 8%; display: flex; justify-content: center; }
+            .col-6 { width: 51%; }
+        }
+
         .social-row {
             display: flex;
             align-items: center;
@@ -81,51 +90,63 @@
         }
 
         .social-label {
-            background-color: #e0e0e0; /* Light grey */
+            background: #e0e0e0;
             padding: 8px 20px;
             font-weight: bold;
             font-size: 1.1rem;
-            flex-grow: 1; /* Stretch to fill */
-            max-width: 350px;
+            flex-grow: 1;
         }
 
-        /* Icons styling - UPDATED for Images */
         .icon-box {
             width: 45px;
             height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            /* Optional: background color to see the box if image is missing */
-            background-color: #f8f9fa; 
+            background: #f8f9fa;
             border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
+
         .icon-box img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Ensures your images fit nicely without distortion */
-            display: block;
+            object-fit: contain;
         }
 
-        /* Vertical Divider Line */
         .vertical-divider {
-            border-right: 5px solid black;
-            height: 100%;
-            position: absolute;
-            right: 0;
-            top: 0;
+            display: none;
         }
 
-        /* Dots Styling */
+        @media (min-width: 992px) {
+            .vertical-divider {
+                display: block;
+                border-right: 5px solid black;
+                height: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+
         .dots-vertical {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-            justify-content: center;
-            margin: 0 20px;
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .dots-vertical {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            background: black;
+            border-radius: 50%;
         }
 
         .dots-horizontal {
@@ -135,21 +156,13 @@
             margin: 30px 0;
         }
 
-        .dot {
-            width: 15px;
-            height: 15px;
-            background-color: black;
-            border-radius: 50%;
-        }
-
-        /* --- Footer Section --- */
+        /* Footer */
         .custom-footer {
-            background-color: black;
+            background: black;
             padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto;
         }
 
         .footer-btn-group {
@@ -161,21 +174,15 @@
             border-radius: 12px;
             padding: 10px 25px;
             font-weight: bold;
-            text-align: left;
-            line-height: 1.2;
             text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-signup-footer {
-            background-color: #e0e0e0;
             color: black;
+            text-align: left;
+            display: inline-block;
+            line-height: 1.2;
         }
 
-        .btn-login-footer {
-            background-color: #007bff;
-            color: white;
-        }
+        .btn-signup-footer { background: #e0e0e0; }
+        .btn-login-footer { background: #007bff; color: white; }
 
         .footer-nav-link {
             color: #d500f9;
@@ -183,93 +190,47 @@
             font-size: 1.5rem;
             text-decoration: none;
         }
-
-        /* Responsive Tweaks */
-        @media (max-width: 992px) {
-            .vertical-divider {
-                display: none;
-            }
-            .info-pill {
-                min-width: auto;
-                width: 100%;
-            }
-            .social-label {
-                font-size: 1rem;
-            }
-            .dots-vertical {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Top Info Header -->
     <div class="info-header">
-        <div class="info-pill">
-            Contact:<br>
-            <span class="info-value">+92 12345678</span>
-        </div>
-        <div class="info-pill">
-            Address:<br>
-            <span class="info-value">Gk2 Road, Slyven UK</span>
-        </div>
+        <div class="info-pill">Contact:<br><span class="info-value">+92 12345678</span></div>
+        <div class="info-pill">Address:<br><span class="info-value">Gk2 Road, Slyven UK</span></div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-container">
-        <div class="row position-relative">
-            
-            <!-- Left Column -->
-            <div class="col-lg-5 mb-5 mb-lg-0 position-relative">
-                <div class="d-flex flex-column h-100">
-                    
-                    <!-- Contact Us Section -->
-                    <div class="section-badge">Contact Us</div>
+        <div class="row">
 
-                    <div class="social-row">
-                        <div class="icon-box">
-                            <!-- Facebook Icon Place -->
-                            <img src="https://placehold.co/45x45/png?text=FB" alt="Facebook Icon">
-                        </div>
-                        <div class="social-label">Bubbly Issue</div>
-                    </div>
+            <div class="col col-5">
+                <div class="section-badge">Contact Us</div>
 
-                    <div class="social-row">
-                        <div class="icon-box">
-                            <!-- Instagram Icon Place -->
-                            <img src="https://placehold.co/45x45/png?text=Insta" alt="Instagram Icon">
-                        </div>
-                        <div class="social-label">Bubbly Issue</div>
-                    </div>
-
-                    <div class="social-row">
-                        <div class="icon-box">
-                            <!-- Email Icon Place -->
-                            <img src="https://placehold.co/45x45/png?text=Mail" alt="Email Icon">
-                        </div>
-                        <div class="social-label">BubbleCorp@gmail.com</div>
-                    </div>
-
-                    <!-- Support Us Section -->
-                    <div class="mt-5">
-                        <div class="section-badge">Support Us</div>
-                        <div class="social-row">
-                            <div class="icon-box">
-                                <!-- Support Icon Place -->
-                                <img src="https://placehold.co/45x45/png?text=Cup" alt="Support Icon">
-                            </div>
-                            <div class="social-label">Bubbly Issue</div>
-                        </div>
-                    </div>
-
+                <div class="social-row">
+                    <div class="icon-box"><img src="fb.png" alt="FB"></div>
+                    <div class="social-label">Bubbly Issue</div>
                 </div>
-                <!-- Vertical Divider (Absolute positioned on desktop) -->
-                <div class="vertical-divider d-none d-lg-block"></div>
+
+                <div class="social-row">
+                    <div class="icon-box"><img src="insta.png" alt="Insta"></div>
+                    <div class="social-label">Bubbly Issue</div>
+                </div>
+
+                <div class="social-row">
+                    <div class="icon-box"><img src="mail.png" alt="Mail"></div>
+                    <div class="social-label">BubbleCorp@gmail.com</div>
+                </div>
+
+                <div class="section-badge" style="margin-top:40px;">Support Us</div>
+
+                <div class="social-row">
+                    <div class="icon-box"><img src="cup.png" alt="Support"></div>
+                    <div class="social-label">Bubbly Issue</div>
+                </div>
+
+                <div class="vertical-divider"></div>
             </div>
 
-            <!-- Middle Dots Column (Visual Only) -->
-            <div class="col-lg-1 d-none d-lg-flex justify-content-center align-items-center">
+            <div class="col col-1">
                 <div class="dots-vertical">
                     <div class="dot"></div>
                     <div class="dot"></div>
@@ -277,70 +238,51 @@
                 </div>
             </div>
 
-            <!-- Right Column -->
-            <div class="col-lg-6">
-                
-                <div class="social-row mt-4">
-                    <div class="icon-box">
-                        <!-- YouTube Icon Place -->
-                        <img src="https://placehold.co/45x45/png?text=YT" alt="YouTube Icon">
-                    </div>
+            <div class="col col-6">
+                <div class="social-row" style="margin-top:20px;">
+                    <div class="icon-box"><img src="yt.png" alt="YT"></div>
                     <div class="social-label">Soapy Bubbles</div>
                 </div>
-                <div class="ms-5 mb-4">
-                    <div class="social-label">Bubbles DIY</div>
-                </div>
+
+                <div class="social-label" style="margin-left:60px; margin-bottom:20px;">Bubbles DIY</div>
 
                 <div class="social-row">
-                    <div class="icon-box">
-                        <!-- Discord Icon Place -->
-                        <img src="https://placehold.co/45x45/png?text=Disc" alt="Discord Icon">
-                    </div>
+                    <div class="icon-box"><img src="disc.png" alt="Discord"></div>
                     <div class="social-label">Bubbles Community</div>
                 </div>
 
-                <!-- Horizontal Dots Separator -->
                 <div class="dots-horizontal">
                     <div class="dot"></div>
                     <div class="dot"></div>
                     <div class="dot"></div>
                 </div>
 
-                <!-- External Support Links -->
                 <div class="social-row">
-                    <div class="icon-box">
-                        <!-- Ko-Fi Icon Place -->
-                        <img src="https://placehold.co/45x45/png?text=KoFi" alt="Ko-Fi Icon">
-                    </div>
-                    <div class="social-label" style="text-transform: lowercase;">https://ko-fi.com/BubblyIssue</div>
+                    <div class="icon-box"><img src="kofi.png" alt="KoFi"></div>
+                    <div class="social-label">ko-fi.com/BubblyIssue</div>
                 </div>
 
                 <div class="social-row">
-                    <div class="icon-box">
-                        <!-- Patreon Icon Place -->
-                        <img src="https://placehold.co/45x45/png?text=Patr" alt="Patreon Icon">
-                    </div>
-                    <div class="social-label" style="text-transform: lowercase;">www.patreon.com/BubblyIssue</div>
+                    <div class="icon-box"><img src="patreon.png" alt="Patreon"></div>
+                    <div class="social-label">patreon.com/BubblyIssue</div>
                 </div>
-
             </div>
+
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="custom-footer">
         <div class="footer-btn-group">
-            <a href="signup.html" class="footer-btn btn-signup-footer">
-                Sign<br>up
-            </a>
-            <a href="index.html" class="footer-btn btn-login-footer">
-                Log<br>in
-            </a>
+            <a class="footer-btn btn-signup-footer">Sign<br>Up</a>
+            <a class="footer-btn btn-login-footer">Log<br>In</a>
         </div>
-        <a href="home.html" class="footer-nav-link">Navigation</a>
+        <a class="footer-nav-link">Navigation</a>
     </footer>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        console.log("Contact page loaded successfully.");
+        alert("Welcome to the Bubble Contact Page!");
+    </script>
+
 </body>
 </html>

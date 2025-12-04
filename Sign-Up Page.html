@@ -1,247 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble Login</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            overflow-x: hidden;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bubble Login</title>
 
-        /* --- Header Section --- */
-        .header-bar {
-            background-color: black;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            padding-left: 40px;
-            position: relative;
-            z-index: 10;
-        }
+<style>
+    /* ---- Global Layout ---- */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow-x: hidden;
+    }
 
-        .brand-text {
-            color: #00ffff; /* Cyan color */
-            font-weight: bold;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-right: 10px;
-        }
+    /* ---- Header Bar ---- */
+    .header {
+        height: 80px;
+        background: black;
+        display: flex;
+        align-items: center;
+        padding-left: 40px;
+        position: relative;
+        z-index: 10;
+    }
 
-        /* --- Background & Water Effect --- */
-        .scene-container {
-            position: relative;
-            height: calc(100vh - 80px);
-            width: 100%;
-            background: linear-gradient(to bottom, 
-                #ffffff 0%, 
-                #ffffff 35%, 
-                #a2d9ff 35%, 
-                #a2d9ff 36%, 
-                #4facfe 36%, 
-                #00f2fe 100%);
-            overflow: hidden;
-        }
+    .logo-text {
+        color: #00ffff;
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 
-        /* Horizon Line / Water Surface detail */
-        .water-surface {
-            position: absolute;
-            top: 35%;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.3);
-            z-index: 1;
-        }
+    .header-bubble-stack {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+    }
 
-        /* --- Bubble Styles (Pure CSS) --- */
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(52, 152, 219, 0.8) 20%, rgba(41, 128, 185, 1) 100%);
-            box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.1), 2px 2px 5px rgba(0,0,0,0.1);
-            z-index: 2;
-        }
+    /* ---- Scene Background ---- */
+    .scene {
+        position: relative;
+        height: calc(100vh - 80px);
+        width: 100%;
+        background-image: url(""); /* <-- PUT YOUR IMAGE HERE */
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+    }
 
-        /* Bubble shine highlight */
-        .bubble::after {
-            content: '';
-            position: absolute;
-            top: 15%;
-            left: 15%;
-            width: 20%;
-            height: 20%;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.8);
-            filter: blur(1px);
-        }
+    .water-line {
+        position: absolute;
+        top: 35%;
+        height: 8px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.35);
+        z-index: 1;
+    }
 
-        /* Header Bubbles */
-        .bubble-header {
-            display: inline-block;
-            position: relative;
-            margin-left: 5px;
-        }
+    /* ---- Bubble Style (Now Image-based) ---- */
+    .bubble {
+        position: absolute;
+        background-image: url(""); /* <-- PUT YOUR BUBBLE IMAGE HERE */
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+        z-index: 2;
+    }
 
-        /* Floating Bubbles Positions (mimicking the image) */
-        .b1 { width: 40px; height: 40px; top: 20%; left: 20%; }
-        .b2 { width: 35px; height: 35px; top: 40%; left: 18%; }
-        .b3 { width: 50px; height: 50px; top: 25%; right: 15%; }
-        .b4 { width: 35px; height: 35px; top: 40%; right: 18%; }
-        .b5 { width: 30px; height: 30px; top: 32%; right: 5%; }
-        
-        /* Header specific small bubbles */
-        .hb1 { width: 15px; height: 15px; margin-bottom: 15px; }
-        .hb2 { width: 20px; height: 20px; margin-top: 5px; }
+    /* You can adjust sizes freely */
+    .bubble-small { width: 20px; height: 20px; }
+    .bubble-medium { width: 35px; height: 35px; }
+    .bubble-large { width: 50px; height: 50px; }
 
+    /* Bubble positions */
+    .b1 { top: 20%; left: 20%; width: 40px; height: 40px; }
+    .b2 { top: 40%; left: 18%; width: 35px; height: 35px; }
+    .b3 { top: 25%; right: 15%; width: 50px; height: 50px; }
+    .b4 { top: 40%; right: 18%; width: 35px; height: 35px; }
+    .b5 { top: 32%; right: 5%;  width: 30px; height: 30px; }
 
-        /* --- Login Card --- */
-        .login-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10; /* Above bubbles */
-        }
+    .header-bubble-1 { width: 15px; height: 15px; }
+    .header-bubble-2 { width: 22px; height: 22px; margin-top: 5px; }
 
-        .login-card {
-            background-color: #6d6b6b; /* Dark grey */
-            width: 350px;
-            padding: 40px 30px;
-            border-radius: 35px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            color: white;
-        }
+    /* ---- Login Form ---- */
+    .login-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 15;
+    }
 
-        .form-label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
+    .login-box {
+        width: 340px;
+        padding: 40px 30px;
+        background: #6d6b6b;
+        border-radius: 35px;
+        color: white;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+    }
 
-        .form-control {
-            background-color: #dcdcdc; /* Light grey inputs */
-            border: none;
-            border-radius: 2px;
-            height: 45px;
-            margin-bottom: 20px;
-        }
-        
-        .form-control:focus {
-            background-color: #ffffff;
-            box-shadow: none;
-            outline: 2px solid #00ffff;
-        }
+    label {
+        font-weight: bold;
+        margin-bottom: 4px;
+        display: block;
+    }
 
-        .form-check-label {
-            font-weight: bold;
-            margin-top: 2px;
-        }
-        
-        .form-check-input {
-            width: 20px;
-            height: 20px;
-            border-radius: 2px;
-            margin-left: 10px;
-            float: right; /* Move checkbox to right to match image layout style if needed, or stick to standard */
-            float: none; /* Reset */
-        }
+    .input-field {
+        width: 100%;
+        height: 42px;
+        background: #dcdcdc;
+        border: none;
+        border-radius: 3px;
+        margin-bottom: 18px;
+        padding-left: 10px;
+        font-size: 1rem;
+    }
 
-        /* Custom alignment for the "Remember me" row to match screenshot */
-        .remember-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-        }
-        
-        .custom-checkbox {
-            width: 25px;
-            height: 25px;
-            background-color: #dcdcdc;
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 10px;
-            cursor: pointer;
-            border-radius: 3px;
-            position: relative;
-        }
+    .input-field:focus {
+        background: white;
+        outline: 2px solid #00ffff;
+    }
 
-        .custom-checkbox input {
-            opacity: 0;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .custom-checkbox input:checked + .checkmark {
-            background-color: #00ffff;
-        }
+    .remember-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 18px;
+        font-weight: bold;
+    }
 
-    </style>
+    /* Custom checkbox */
+    .checkbox-box {
+        width: 26px;
+        height: 26px;
+        background: #dcdcdc;
+        border-radius: 3px;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .checkbox-box input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+    }
+
+    .checkbox-box input:checked + .mark {
+        background: #00ffff;
+    }
+
+    .mark {
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        transition: 0.2s;
+    }
+</style>
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header-bar">
-        <div class="brand-text">BUBBLE</div>
-        <div class="d-flex flex-column ms-2">
-            <div class="bubble hb1"></div>
-            <div class="bubble hb2"></div>
+<!-- Header -->
+<div class="header">
+    <div class="logo-text">BUBBLE</div>
+    <div class="header-bubble-stack">
+        <div class="bubble header-bubble-1"></div>
+        <div class="bubble header-bubble-2"></div>
+    </div>
+</div>
+
+<!-- Main Scene -->
+<div class="scene">
+
+    <!-- Scene Bubbles -->
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
+    <div class="bubble b5"></div>
+
+    <!-- Water Line -->
+    <div class="water-line"></div>
+
+    <!-- Login Center Box -->
+    <div class="login-area">
+        <div class="login-box">
+
+            <form>
+                <label for="email">Email:</label>
+                <input id="email" class="input-field" type="email">
+
+                <label for="password">Password:</label>
+                <input id="password" class="input-field" type="password">
+
+                <div class="remember-row">
+                    <span>Remember me?</span>
+
+                    <label class="checkbox-box">
+                        <input type="checkbox">
+                        <span class="mark"></span>
+                    </label>
+                </div>
+            </form>
+
         </div>
     </div>
 
-    <!-- Main Scene -->
-    <div class="scene-container">
-        
-        <!-- Background Bubbles -->
-        <div class="bubble b1"></div>
-        <div class="bubble b2"></div>
-        <div class="bubble b3"></div>
-        <div class="bubble b4"></div>
-        <div class="bubble b5"></div>
-        
-        <!-- Water Surface Line -->
-        <div class="water-surface"></div>
+</div>
 
-        <!-- Login Form Overlay -->
-        <div class="login-wrapper">
-            <div class="login-card">
-                <form>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" id="password">
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-4">
-                        <label class="form-check-label text-white fw-bold">Remember me?</label>
-                        <!-- Custom styled checkbox to match the big square in image -->
-                        <div class="custom-checkbox">
-                            <input type="checkbox" id="remember">
-                            <span class="checkmark"></span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+<script>
+    console.log("Bubble Login Page Loaded Successfully!");
+    alert("Welcome back to Bubble!");
+</script>
 
-    </div>
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
